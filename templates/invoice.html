@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { font-family: sans-serif; line-height: 1.6; color: #333; }
+    .invoice-box { max-width: 800px; margin: auto; padding: 30px; border: 1px solid #eee; }
+    table { width: 100%; text-align: left; border-collapse: collapse; }
+    th { border-bottom: 2px solid #eee; padding: 10px; }
+    td { padding: 10px; }
+    .total { font-weight: bold; border-top: 2px solid #eee; }
+  </style>
+</head>
+<body>
+  <div class="invoice-box">
+    <h1>Invoice #{{invoiceNumber}}</h1>
+    <p>Date: {{date}}</p>
+    
+    <h3>Bill To:</h3>
+    <p>{{customerName}}<br>{{customerAddress}}</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Quantity</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each items}}
+        <tr>
+          <td>{{this.name}}</td>
+          <td>{{this.quantity}}</td>
+          <td>${{this.price}}</td>
+        </tr>
+        {{/each}}
+      </tbody>
+      <tfoot>
+        <tr class="total">
+          <td colspan="2">Total</td>
+          <td>${{totalAmount}}</td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</body>
+</html>

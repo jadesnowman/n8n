@@ -56,20 +56,20 @@ services:
     ports:
       - "5678:5678"
     environment:
+      - DB_POSTGRESDB_DATABASE=${DB_NAME:-n8n_db}
+      - DB_POSTGRESDB_HOST=postgres
+      - DB_POSTGRESDB_PASSWORD=${DB_PASSWORD:-n8n_password}
+      - DB_POSTGRESDB_PORT=5432
+      - DB_POSTGRESDB_USER=${DB_USER:-n8n_user}
+      - DB_TYPE=postgresdb
+      - N8N_ENCRYPTION_KEY=${N8N_ENCRYPTION_KEY:-replace_this_with_a_long_random_string}
+      - N8N_EXECUTION_MODE=queue
       - N8N_HOST=${DOMAIN_NAME:-localhost}
       - N8N_PORT=5678
       - N8N_PROTOCOL=http
       - NODE_ENV=production
-      - N8N_EXECUTION_MODE=queue
-      - DB_TYPE=postgresdb
-      - DB_POSTGRESDB_HOST=postgres
-      - DB_POSTGRESDB_PORT=5432
-      - DB_POSTGRESDB_DATABASE=${DB_NAME:-n8n_db}
-      - DB_POSTGRESDB_USER=${DB_USER:-n8n_user}
-      - DB_POSTGRESDB_PASSWORD=${DB_PASSWORD:-n8n_password}
       - QUEUE_BULL_REDIS_HOST=redis
       - QUEUE_BULL_REDIS_PORT=6379
-      - N8N_ENCRYPTION_KEY=${N8N_ENCRYPTION_KEY:-replace_this_with_a_long_random_string}
     volumes:
       - n8n_data:/home/node/.n8n
     depends_on:
@@ -86,17 +86,17 @@ services:
     restart: always
     command: worker
     environment:
-      - N8N_EXECUTION_MODE=queue
-      - DB_TYPE=postgresdb
-      - DB_POSTGRESDB_HOST=postgres
-      - DB_POSTGRESDB_PORT=5432
       - DB_POSTGRESDB_DATABASE=${DB_NAME:-n8n_db}
-      - DB_POSTGRESDB_USER=${DB_USER:-n8n_user}
+      - DB_POSTGRESDB_HOST=postgres
       - DB_POSTGRESDB_PASSWORD=${DB_PASSWORD:-n8n_password}
+      - DB_POSTGRESDB_PORT=5432
+      - DB_POSTGRESDB_USER=${DB_USER:-n8n_user}
+      - DB_TYPE=postgresdb
+      - N8N_ENCRYPTION_KEY=${N8N_ENCRYPTION_KEY:-replace_this_with_a_long_random_string}
+      - N8N_EXECUTION_MODE=queue
       - QUEUE_BULL_REDIS_DB=5
       - QUEUE_BULL_REDIS_HOST=redis
       - QUEUE_BULL_REDIS_PORT=6379
-      - N8N_ENCRYPTION_KEY=${N8N_ENCRYPTION_KEY:-replace_this_with_a_long_random_string}
     volumes:
       - n8n_data:/home/node/.n8n
     depends_on:
