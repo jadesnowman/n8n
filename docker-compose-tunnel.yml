@@ -1,0 +1,15 @@
+services:
+  # tunnel:
+  #   container_name: cloudflared-tunnel
+  #   image: cloudflare/cloudflared:latest
+  #   restart: always
+  #   command: tunnel run
+  #   environment:
+  #     - TUNNEL_TOKEN=${TUNNEL_TOKEN}
+  #   depends_on:
+  #     - n8n-main
+
+  tunnel:
+    image: cloudflare/cloudflared:latest
+    command: tunnel --url http://n8n-main:5678
+    restart: always
